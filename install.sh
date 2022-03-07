@@ -6,10 +6,16 @@ sudo apt install python psmisc xserver-xorg-core x11-xserver-utils x11-utils ima
 ffmpeg wireless-tools openbox pulseaudio alsa-utils brightnessctl nitrogen dunst tint2   \
 lxpolkit rxvt-unicode xclip scrot mpd mpc thunar thunar-archive-plugin thunar-volman     \
 ffmpegthumbnailer tumbler w3m w3m-img ncmpcpp viewnior mpv pavucontrol parcellite        \
-gsimplecal neofetch htop xsettingsd xautolock rofi rsync git build-essential cmake curl -y
+gsimplecal neofetch htop xsettingsd xautolock rsync git build-essential cmake curl -y
+
+# Install rofi
+sudo add-apt-repository ppa:cppiber/ppa
+echo -ne '\n' # This line simulate Enter key
+sudo apt update
+sudo apt install rofi -y
 
 # Install zsh
-sudo apt install zsh && chsh -s $(command -v zsh)
+sudo apt install zsh -y && chsh -s $(command -v zsh)
 
 # Intall picom dependencies
 sudo apt install meson ninja-build libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev        \
@@ -29,7 +35,7 @@ ninja -C build install
 echo 'deb http://download.opensuse.org/repositories/home:/Head_on_a_Stick:/obmenu-generator/Debian_10/ /' | sudo tee /etc/apt/sources.list.d/home:Head_on_a_Stick:obmenu-generator.list
 curl -fsSL https://download.opensuse.org/repositories/home:Head_on_a_Stick:obmenu-generator/Debian_10/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_Head_on_a_Stick_obmenu-generator.gpg > /dev/null
 sudo apt update
-sudo apt install obmenu-generator
+sudo apt install obmenu-generator -y
 
 # Go to Documents directory and clone owl4ce's repository
 cd ~/Documents/ && git clone --depth 1 https://github.com/owl4ce/dotfiles.git
@@ -48,7 +54,7 @@ popd
 fc-cache -rv
 
 # Update MPD Database
-[ -n "$(grep mpd)" ] || mpd && mpc update
+# [ -n "$(grep mpd)" ] || mpd && mpc update
 
 # Root privileges to brightnessctl
 sudo chmod u+s $(command -v brightnessctl)
