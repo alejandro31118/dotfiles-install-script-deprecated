@@ -6,7 +6,7 @@ sudo apt install python psmisc xserver-xorg-core x11-xserver-utils x11-utils ima
 ffmpeg wireless-tools openbox pulseaudio alsa-utils brightnessctl nitrogen dunst tint2   \
 lxpolkit rxvt-unicode xclip scrot mpd mpc thunar thunar-archive-plugin thunar-volman     \
 ffmpegthumbnailer tumbler w3m w3m-img ncmpcpp viewnior mpv pavucontrol parcellite        \
-gsimplecal neofetch htop xsettingsd xautolock rofi rsync git build-essential cmake -y
+gsimplecal neofetch htop xsettingsd xautolock rofi rsync git build-essential cmake curl -y
 
 # Install zsh
 sudo apt install zsh && chsh -s $(command -v zsh)
@@ -24,6 +24,12 @@ git checkout 9cb552ecd91ec644bf6fcb558ddd44fda5b4f7d9 && \
 meson --buildtype=release . build                     && \
 ninja -C build                                        && \
 ninja -C build install
+
+# Install obmenu-generator
+echo 'deb http://download.opensuse.org/repositories/home:/Head_on_a_Stick:/obmenu-generator/Debian_10/ /' | sudo tee /etc/apt/sources.list.d/home:Head_on_a_Stick:obmenu-generator.list
+curl -fsSL https://download.opensuse.org/repositories/home:Head_on_a_Stick:obmenu-generator/Debian_10/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_Head_on_a_Stick_obmenu-generator.gpg > /dev/null
+sudo apt update
+sudo apt install obmenu-generator
 
 # Go to Documents directory and clone owl4ce's repository
 cd ~/Documents/ && git clone --depth 1 https://github.com/owl4ce/dotfiles.git
