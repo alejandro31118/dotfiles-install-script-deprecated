@@ -1,9 +1,15 @@
+# Update and upgrade packages
+sudo apt update && sudo apt upgrade -y
+
 # Install general dependencies
-sudo apt install zsh python psmisc xserver-xorg-core x11-xserver-utils x11-utils imagemagick \
+sudo apt install python psmisc xserver-xorg-core x11-xserver-utils x11-utils imagemagick \
 ffmpeg wireless-tools openbox pulseaudio alsa-utils brightnessctl nitrogen dunst tint2   \
 lxpolkit rxvt-unicode xclip scrot mpd mpc thunar thunar-archive-plugin thunar-volman     \
 ffmpegthumbnailer tumbler w3m w3m-img ncmpcpp viewnior mpv pavucontrol parcellite        \
-gsimplecal neofetch htop xsettingsd xautolock rofi rsync -y
+gsimplecal neofetch htop xsettingsd xautolock rofi rsync git build-essential cmake -y
+
+# Install zsh
+sudo apt install zsh && chsh -s $(command -v zsh)
 
 # Intall picom dependencies
 sudo apt install meson ninja-build libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev        \
@@ -24,27 +30,3 @@ cd ~/Documents/ && git clone --depth 1 https://github.com/owl4ce/dotfiles.git
 
 # Installation with rsync
 rsync -avxHAXP --exclude '.git*' --exclude 'LICENSE' --exclude '*.md' dotfiles/ ~/
-
-# Install icon theme
-pushd ~/.icons/ && \
-    tar -xJf Papirus-Custom.tar.xz && tar -xJf Papirus-Dark-Custom.tar.xz && \
-    sudo ln -vs ~/.icons/Papirus-Custom /usr/share/icons/
-    sudo ln -vs ~/.icons/Papirus-Dark-Custom /usr/share/icons/
-popd
-
-# Refresh font cache
-fc-cache -rv
-
-# Update MPD database
-[ -n "$(pgrep mpd)" ] || mpd && mpc update
-
-# Give privileges to brightnessctl
-sudo chmod u+s $(command -v brightnessctl)
-
-# Symlink sh to bash
-[ "$(readlink -f /bin/sh)" != "$(command -v bash)" ] && sudo ln -vfs $(command -v bash) /bin/sh
-
-# 
-# exec openbox-session
-
-# Get user's home directory = $HOME
