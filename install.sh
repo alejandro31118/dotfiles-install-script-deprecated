@@ -36,3 +36,22 @@ cd ~/Documents/ && git clone --depth 1 https://github.com/owl4ce/dotfiles.git
 
 # Installation with rsync
 rsync -avxHAXP --exclude '.git*' --exclude 'LICENSE' --exclude '*.md' dotfiles/ ~/
+
+# Install icon theme
+pushd ~/.icons/ && \
+    tar -xJf Papirus-Custom.tar.xz && tar -xJf Papirus-Dark-Custom.tar.xz && \
+    sudo ln -vs ~/.icons/Papirus-Custom /usr/share/icons/
+    sudo ln -vs ~/.icons/Papirus-Dark-Custom /usr/share/icons/
+popd
+
+# Refresh font cache
+fc-cache -rv
+
+# Update MPD Database
+[ -n "$(grep mpd)" ] || mpd && mpc update
+
+# Root privileges to brightnessctl
+sudo chmod u+s $(command -v brightnessctl)
+
+# Symlink sh to bash
+[ "$(readlink -f /bin/sh)" != "$(command -v bash)" ] && sudo ln -vfs $(command -v bash) /bin/sh
