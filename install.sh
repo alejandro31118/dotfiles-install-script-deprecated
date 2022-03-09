@@ -10,7 +10,6 @@ gsimplecal neofetch htop xsettingsd xautolock rsync git build-essential cmake cu
 
 # Install rofi
 sudo add-apt-repository ppa:cppiber/ppa
-echo -ne '\n' # This line simulate Enter key
 sudo apt update
 sudo apt install rofi -y
 
